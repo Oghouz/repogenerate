@@ -1,0 +1,12 @@
+{
+    "name": "oghouz/repogenerate",
+    "description": "repository generator",
+    "authors": [
+        {
+            "name": "Mardan MEMET",
+            "email": "mardan828@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
