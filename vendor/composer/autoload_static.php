@@ -11,20 +11,13 @@ class ComposerStaticInita48fe6b5ffc7601fafde64fe571ed6cf
         array (
             'Oghouz\\RepoGenerate\\' => 20,
         ),
-        'A' => 
-        array (
-            'App\\' => 4,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'Oghouz\\RepoGenerate\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/packages/oghouz/repogenerate/src',
-        ),
-        'App\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/app',
+            0 => __DIR__ . '/../..' . '/src',
+            1 => __DIR__ . '/../..' . '/src',
         ),
     );
 

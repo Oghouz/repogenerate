@@ -1,12 +1,29 @@
 {
     "name": "oghouz/repogenerate",
-    "description": "repository generator",
+    "description": "Laravel repository generator",
     "authors": [
         {
             "name": "Mardan MEMET",
             "email": "mardan828@gmail.com"
         }
     ],
+    "keywords": [
+        "laravel",
+        "lumen",
+        "repository",
+        "repositories"
+    ],
+    "license": "MIT",
     "minimum-stability": "dev",
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Oghouz\\RepoGenerate\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Oghouz\\RepoGenerate\\": "src"
+        }
+    }
 }

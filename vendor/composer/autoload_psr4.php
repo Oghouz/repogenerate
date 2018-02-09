@@ -6,6 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Oghouz\\RepoGenerate\\' => array($baseDir . '/packages/oghouz/repogenerate/src'),
-    'App\\' => array($baseDir . '/app'),
+    'Oghouz\\RepoGenerate\\' => array($baseDir . '/src', $baseDir . '/src'),
 );
