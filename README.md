@@ -1,20 +1,20 @@
 # Laravel Repository Generator
 
-*This package permission generate repository class for your controller and model in Laravel*
+*This package offer the possibility to generate repository for Laravel*
 
 ### Installation
 
-#####1. Install  package wit composer
+##### 1. Install  package wit composer
 
     composer require oghouz/repogenerate
 
-#####2. Register the service provider
+##### 2. Register the service provider
 
 Add the provider to config/app.php
 
     Oghouz\RepoGenerate\RepoGenerateServiceProvider::class,
     
-#####3. Publish 
+##### 3. Publish 
 
     php artisan vendor:publish --provider="Oghouz\RepoGenerate\RepoGenerateServiceProvider"
 
