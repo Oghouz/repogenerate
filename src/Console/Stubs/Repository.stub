@@ -2,14 +2,15 @@
 
 namespace __NAMESPACE__REPOSITORY__;
 
+use Oghouz\RepoGenerate\Repository;
 use __NAMESPACE__MODEL__;
 
-class __REPOSITORY_NAME__
+class __REPOSITORY_NAME__ extends Repository
 {
 
-    public function __construct()
+    public function __construct(__MODEL__ $model)
     {
-
+        parent::__construct($model);
     }
 
 }

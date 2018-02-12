@@ -20,6 +20,8 @@ class RepoGenerate extends Command
      */
     protected $description = 'Create a new repository';
 
+    protected $hasModel = false;
+
     /**
      * Create a new command instance.
      *
@@ -41,9 +43,10 @@ class RepoGenerate extends Command
         $this->checkPermission();
         $this->repositoryFolder();
 
-        $model = $this->argument('model');
+        $model = ucfirst($this->argument('model'));
         $this->checkModel($model);
-        $repository_file    = $this->repositoryFile($model);
+
+        $repository_file    = $this->getFilename($model);
         $repository_content = $this->getContent($model);
 
         $this->generateRepository($repository_file, $repository_content);
@@ -54,6 +57,7 @@ class RepoGenerate extends Command
         $content = $this->getRepositoryStub();
         $content = str_replace('__NAMESPACE__MODEL__', config('repository.namespace_model') . '\\' . $model, $content);
         $content = str_replace('__NAMESPACE__REPOSITORY__', config('repository.namespace'), $content);
+        $content = str_replace('__MODEL__', $model, $content);
         return str_replace('__REPOSITORY_NAME__', $model.'Repository', $content);
     }
 
@@ -94,13 +98,13 @@ class RepoGenerate extends Command
 
                 $this->call("make:model", ['name' => $model]);
                 $this->info($model .' model has been created!');
-                return true;
+                $this->hasModel = true;
             }
+        } else {
 
-            return false;
+            $this->hasModel = true;
         }
 
-        return true;
     }
 
     /**
@@ -127,7 +131,7 @@ class RepoGenerate extends Command
      * @param $model
      * @return string
      */
-    protected function repositoryFile($model)
+    protected function getFilename($model)
     {
         $path = config('repository.folder');
         return $path . DIRECTORY_SEPARATOR . ucfirst($model) . 'Repository.php';
@@ -152,7 +156,12 @@ class RepoGenerate extends Command
 
             if (file_put_contents($file, $content)) {
 
+                if (!$this->hasModel) {
+
+                    $this->warn("Please make sure model before using repository!");
+                }
                 $this->info('Repository has been successfully created.');
+
             } else {
 
                 $this->error('Error during creation repository');
@@ -175,7 +184,6 @@ class RepoGenerate extends Command
         }
 
         throw new \Exception('Repository stub file not found!');
-
     }
 
 }
