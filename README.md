@@ -6,11 +6,13 @@
 
 1. Install  package wit composer
 
+
     composer require oghouz/repogenerate
 
 2. Register the service provider
 
 Add the provider to config/app.php
+
 
     Oghouz\RepoGenerate\RepoGenerateServiceProvider::class,
     
@@ -21,9 +23,11 @@ Add the provider to config/app.php
 
 ### Configuration
 
+
     config/repository.php
 
 ### Usage
+
 
     php artisan make:repository YourModelName   
 

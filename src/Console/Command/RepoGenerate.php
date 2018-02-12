@@ -39,9 +39,7 @@ class RepoGenerate extends Command
      */
     public function handle()
     {
-
         $this->checkPermission();
-        $this->repositoryFolder();
 
         $model = ucfirst($this->argument('model'));
         $this->checkModel($model);
@@ -115,7 +113,7 @@ class RepoGenerate extends Command
      */
     protected function checkPermission()
     {
-        $repository_path = config('repository.folder');
+        $repository_path = $this->repositoryFolder();
 
         if (!is_writable($repository_path)) {
 
