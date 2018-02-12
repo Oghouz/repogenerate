@@ -4,9 +4,8 @@ namespace Oghouz\RepoGenerate;
 
 class Repository
 {
-
     /**
-     *  The model using for repository
+     *  The model using for repository.
      *
      * @var
      */
@@ -14,11 +13,11 @@ class Repository
 
     /**
      * Repository constructor.
+     *
      * @param $model
      */
     public function __construct($model)
     {
         $this->model = $model;
     }
-
 }

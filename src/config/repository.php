@@ -13,7 +13,6 @@ return [
 
     'folder'          => 'app\\Repositories',
     'namespace'       => 'App\\Repositories',
-    'namespace_model' => 'App'
-
+    'namespace_model' => 'App',
 
 ];

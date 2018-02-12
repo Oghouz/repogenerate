@@ -54,6 +54,7 @@ class RepoGenerate extends Command
      *  Get repository content.
      *
      * @param $model
+     *
      * @return mixed
      */
     protected function getContent($model)
@@ -62,6 +63,7 @@ class RepoGenerate extends Command
         $content = str_replace('__NAMESPACE__MODEL__', config('repository.namespace_model').'\\'.$model, $content);
         $content = str_replace('__NAMESPACE__REPOSITORY__', config('repository.namespace'), $content);
         $content = str_replace('__MODEL__', $model, $content);
+
         return str_replace('__REPOSITORY_NAME__', $model.'Repository', $content);
     }
 
@@ -106,7 +108,7 @@ class RepoGenerate extends Command
             $createModule = $this->confirm('Model is not exist, your want create?');
             if ($createModule) {
 
-                $this->call("make:model", ['name' => $model]);
+                $this->call('make:model', ['name' => $model]);
                 $this->info($model.' model has been created!');
                 $this->hasModel = true;
             }
@@ -120,8 +122,9 @@ class RepoGenerate extends Command
     /**
      * Check repository folder is writable.
      *
-     * @return bool
      * @throws \Exception
+     *
+     * @return bool
      */
     protected function checkPermission()
     {
@@ -139,6 +142,7 @@ class RepoGenerate extends Command
      *  Generate repository file name.
      *
      * @param $model
+     *
      * @return string
      */
     protected function getFilename($model)
@@ -152,6 +156,7 @@ class RepoGenerate extends Command
      * Generate the repository file.
      *
      * @param $file
+     *
      * @param $content
      */
     protected function generateRepository($file, $content)
@@ -183,6 +188,7 @@ class RepoGenerate extends Command
      * Repository content.
      *
      * @return string
+     *
      * @throws \Exception
      */
     protected function getRepositoryStub()

@@ -26,7 +26,7 @@ class RepoGenerateServiceProvider extends ServiceProvider
     {
 
         $this->publishes([
-            __DIR__.'/config/repository.php' => config_path('repository.php')
+            __DIR__.'/config/repository.php' => config_path('repository.php'),
         ]);
 
         $this->commands('command.make.repository');
