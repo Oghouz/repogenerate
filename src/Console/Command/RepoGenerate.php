@@ -38,18 +38,23 @@ class RepoGenerate extends Command
     public function handle()
     {
 
+        $this->checkPermission();
         $this->repositoryFolder();
 
-        $model              = $this->argument('model');
-        $repository_file    = $this->repositoryFile($model);
-        $repository_content = $this->repositoryContent($model);
-
-
+        $model = $this->argument('model');
         $this->checkModel($model);
+        $repository_file    = $this->repositoryFile($model);
+        $repository_content = $this->getContent($model);
 
         $this->generateRepository($repository_file, $repository_content);
+    }
 
-
+    protected function getContent($model)
+    {
+        $content = $this->getRepositoryStub();
+        $content = str_replace('__NAMESPACE__MODEL__', config('repository.namespace_model') . '\\' . $model, $content);
+        $content = str_replace('__NAMESPACE__REPOSITORY__', config('repository.namespace'), $content);
+        return str_replace('__REPOSITORY_NAME__', $model.'Repository', $content);
     }
 
     /**
@@ -69,11 +74,13 @@ class RepoGenerate extends Command
         return $config_repository_folder;
     }
 
+
     /**
      *  Check Model is exist
      *  if not exist create model with user confirmation
      *
      * @param $model
+     * @return bool
      */
     protected function checkModel($model)
     {
@@ -87,22 +94,28 @@ class RepoGenerate extends Command
 
                 $this->call("make:model", ['name' => $model]);
                 $this->info($model .' model has been created!');
+                return true;
             }
+
+            return false;
         }
+
+        return true;
     }
 
     /**
-     *  Check repository folder is writable
+     * Check repository folder is writable
      *
      * @return bool
+     * @throws \Exception
      */
-    protected function checkRepositoryPermission()
+    protected function checkPermission()
     {
         $repository_path = config('repository.folder');
 
-        if (! is_dir($repository_path) && !is_writable($repository_path)) {
+        if (!is_writable($repository_path)) {
 
-            return false;
+            throw new \Exception('Not write permission for repository folder!');
         }
 
         return true;
@@ -120,34 +133,6 @@ class RepoGenerate extends Command
         return $path . DIRECTORY_SEPARATOR . ucfirst($model) . 'Repository.php';
     }
 
-    /**
-     *  Generate default repository content
-     *
-     * @param $model
-     * @return string
-     */
-    protected function repositoryContent($model)
-    {
-        $namespace = config('repository.namespace');
-        $namespace_model = config('repository.namespace_model');
-
-        return "<?php
-        
-namespace $namespace;
-        
-use ".$namespace_model . "\\" . $model. ";
-        
-class ".$model."Repository 
-{
-        
-    public function __construct()
-    {
-    
-    }
-            
-}
-";
-    }
 
     /**
      * Generate the repository file
@@ -173,6 +158,24 @@ class ".$model."Repository
                 $this->error('Error during creation repository');
             }
         }
+    }
+
+    /**
+     * Repository content
+     *
+     * @return string
+     * @throws \Exception
+     */
+    protected function getRepositoryStub()
+    {
+        $stub = __DIR__ . '/../Stubs/Repository.stub';
+
+        if (file_exists($stub)) {
+            return file_get_contents($stub);
+        }
+
+        throw new \Exception('Repository stub file not found!');
+
     }
 
 }

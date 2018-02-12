@@ -1,0 +1,15 @@
+<?php
+
+namespace __NAMESPACE__REPOSITORY__;
+
+use __NAMESPACE__MODEL__;
+
+class __REPOSITORY_NAME__
+{
+
+    public function __construct()
+    {
+
+    }
+
+}

@@ -11,7 +11,9 @@ return [
     |
     */
 
-    'repository_path' => 'app\\repository',
+    'folder' => 'app\\Repositories',
+    'namespace' => 'App\\Repositories',
+    'namespace_model' => 'App'
 
 
 ];
