@@ -2,6 +2,8 @@
 
 *This package offer the possibility to generate repository for Laravel*
 
+
+
 ### Installation
 
 1. Install  package wit composer

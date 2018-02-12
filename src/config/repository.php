@@ -11,8 +11,8 @@ return [
     |
     */
 
-    'folder' => 'app\\Repositories',
-    'namespace' => 'App\\Repositories',
+    'folder'          => 'app\\Repositories',
+    'namespace'       => 'App\\Repositories',
     'namespace_model' => 'App'
 
 

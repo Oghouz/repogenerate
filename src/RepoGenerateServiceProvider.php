@@ -26,7 +26,7 @@ class RepoGenerateServiceProvider extends ServiceProvider
     {
 
         $this->publishes([
-            __DIR__ . '/config/repository.php' => config_path('repository.php')
+            __DIR__.'/config/repository.php' => config_path('repository.php')
         ]);
 
         $this->commands('command.make.repository');
@@ -39,7 +39,7 @@ class RepoGenerateServiceProvider extends ServiceProvider
     public function provides()
     {
         return [
-            'command.make.repository'
+            'command.make.repository',
         ];
     }
 

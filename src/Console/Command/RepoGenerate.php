@@ -44,24 +44,29 @@ class RepoGenerate extends Command
         $model = ucfirst($this->argument('model'));
         $this->checkModel($model);
 
-        $repository_file    = $this->getFilename($model);
+        $repository_file = $this->getFilename($model);
         $repository_content = $this->getContent($model);
 
         $this->generateRepository($repository_file, $repository_content);
     }
 
+    /**
+     *  Get repository content.
+     *
+     * @param $model
+     * @return mixed
+     */
     protected function getContent($model)
     {
         $content = $this->getRepositoryStub();
-        $content = str_replace('__NAMESPACE__MODEL__', config('repository.namespace_model') . '\\' . $model, $content);
+        $content = str_replace('__NAMESPACE__MODEL__', config('repository.namespace_model').'\\'.$model, $content);
         $content = str_replace('__NAMESPACE__REPOSITORY__', config('repository.namespace'), $content);
         $content = str_replace('__MODEL__', $model, $content);
         return str_replace('__REPOSITORY_NAME__', $model.'Repository', $content);
     }
 
     /**
-     * Check repository folder is exist,
-     *  else create repository folder
+     * Check and create repository folder.
      */
     protected function repositoryFolder()
     {
@@ -69,8 +74,16 @@ class RepoGenerate extends Command
 
         if (!is_dir($config_repository_folder)) {
 
-            \File::makeDirectory($config_repository_folder);
-            $this->info('Repository folder created successful');
+            try {
+
+                \File::makeDirectory($config_repository_folder);
+                $this->info('Repository folder created successful');
+
+            } catch (\Exception $e) {
+
+                $this->error($e->getMessage());
+            }
+
         }
 
         return $config_repository_folder;
@@ -79,23 +92,22 @@ class RepoGenerate extends Command
 
     /**
      *  Check Model is exist
-     *  if not exist create model with user confirmation
+     *  if not exist create model with user confirmation.
      *
      * @param $model
-     * @return bool
      */
     protected function checkModel($model)
     {
         $model = ucfirst($model);
         $namespace_model = ucfirst(config('repository.namespace_model'));
 
-        if (!class_exists($namespace_model . '\\' . $model)) {
+        if (!class_exists($namespace_model.'\\'.$model)) {
 
             $createModule = $this->confirm('Model is not exist, your want create?');
             if ($createModule) {
 
                 $this->call("make:model", ['name' => $model]);
-                $this->info($model .' model has been created!');
+                $this->info($model.' model has been created!');
                 $this->hasModel = true;
             }
         } else {
@@ -106,7 +118,7 @@ class RepoGenerate extends Command
     }
 
     /**
-     * Check repository folder is writable
+     * Check repository folder is writable.
      *
      * @return bool
      * @throws \Exception
@@ -124,7 +136,7 @@ class RepoGenerate extends Command
     }
 
     /**
-     *  Generate repository file name
+     *  Generate repository file name.
      *
      * @param $model
      * @return string
@@ -132,12 +144,12 @@ class RepoGenerate extends Command
     protected function getFilename($model)
     {
         $path = config('repository.folder');
-        return $path . DIRECTORY_SEPARATOR . ucfirst($model) . 'Repository.php';
+        return $path.DIRECTORY_SEPARATOR.ucfirst($model).'Repository.php';
     }
 
 
     /**
-     * Generate the repository file
+     * Generate the repository file.
      *
      * @param $file
      * @param $content
@@ -156,7 +168,7 @@ class RepoGenerate extends Command
 
                 if (!$this->hasModel) {
 
-                    $this->warn("Please make sure model before using repository!");
+                    $this->warn('Please make sure model before using repository!');
                 }
                 $this->info('Repository has been successfully created.');
 
@@ -168,14 +180,14 @@ class RepoGenerate extends Command
     }
 
     /**
-     * Repository content
+     * Repository content.
      *
      * @return string
      * @throws \Exception
      */
     protected function getRepositoryStub()
     {
-        $stub = __DIR__ . '/../Stubs/Repository.stub';
+        $stub = __DIR__.'/../Stubs/Repository.stub';
 
         if (file_exists($stub)) {
             return file_get_contents($stub);
