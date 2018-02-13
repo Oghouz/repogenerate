@@ -17,19 +17,16 @@
     "minimum-stability": "dev",
     "require": {},
     "require-dev": {
-        "phpunit/phpunit": "~4.8.*"
+        "phpunit/phpunit": "4.8.*"
     },
     "autoload": {
         "psr-4": {
-            "Oghouz\\RepoGenerate\\": "src"
+            "Oghouz\\RepoGenerate\\": "src/"
         }
     },
     "autoload-dev": {
-        "class-map": [
-            "tests/RepositoryTest.php"
-        ],
         "psr-4": {
-            "Oghouz\\RepoGenerate\\": "src"
+            "Oghouz\\Tests\\Repository\\": "tests/"
         }
     }
 }
