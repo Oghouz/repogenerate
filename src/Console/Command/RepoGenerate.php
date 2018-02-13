@@ -121,7 +121,6 @@ class RepoGenerate extends Command
         $repository_path = $this->repositoryFolder();
 
         if (!is_writable($repository_path)) {
-
             throw new \Exception('Not write permission for repository folder!');
         }
 
@@ -146,7 +145,6 @@ class RepoGenerate extends Command
      * Generate the repository file.
      *
      * @param $file
-     *
      * @param $content
      */
     protected function generateRepository($file, $content)
