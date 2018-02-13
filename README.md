@@ -1,8 +1,15 @@
 # Laravel Repository Generator
-[![StyleCI](https://styleci.io/repos/120919876/shield?branch=master)](https://styleci.io/repos/120919876) 
+[![StyleCI](https://styleci.io/repos/120919876/shield?branch=master)](https://styleci.io/repos/120919876) [![Latest Stable Version](https://poser.pugx.org/oghouz/repogenerate/v/stable)](https://packagist.org/packages/oghouz/repogenerate) [![Total Downloads](https://poser.pugx.org/oghouz/repogenerate/downloads)](https://packagist.org/packages/oghouz/repogenerate) [![Latest Unstable Version](https://poser.pugx.org/oghouz/repogenerate/v/unstable)](https://packagist.org/packages/oghouz/repogenerate)
 
-*This package offer the possibility to generate repository for Laravel*
+*This package offer the possibility to generate repository for Laravel 5*
 
+### Compatibility
+
+ Laravel      |
+:-------------|
+ 5.3.x        |
+ 5.4.x        |
+ 5.5.x and up |
 
 
 ### Installation
