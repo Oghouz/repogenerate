@@ -75,22 +75,16 @@ class RepoGenerate extends Command
         $config_repository_folder = config('repository.folder');
 
         if (!is_dir($config_repository_folder)) {
-
             try {
-
                 \File::makeDirectory($config_repository_folder);
                 $this->info('Repository folder created successful');
-
             } catch (\Exception $e) {
-
                 $this->error($e->getMessage());
             }
-
         }
 
         return $config_repository_folder;
     }
-
 
     /**
      *  Check Model is exist
@@ -104,19 +98,15 @@ class RepoGenerate extends Command
         $namespace_model = ucfirst(config('repository.namespace_model'));
 
         if (!class_exists($namespace_model.'\\'.$model)) {
-
             $createModule = $this->confirm('Model is not exist, your want create?');
             if ($createModule) {
-
                 $this->call('make:model', ['name' => $model]);
                 $this->info($model.' model has been created!');
                 $this->hasModel = true;
             }
         } else {
-
             $this->hasModel = true;
         }
-
     }
 
     /**
@@ -148,9 +138,9 @@ class RepoGenerate extends Command
     protected function getFilename($model)
     {
         $path = config('repository.folder');
+
         return $path.DIRECTORY_SEPARATOR.ucfirst($model).'Repository.php';
     }
-
 
     /**
      * Generate the repository file.
@@ -161,24 +151,16 @@ class RepoGenerate extends Command
      */
     protected function generateRepository($file, $content)
     {
-
         if (file_exists($file)) {
-
             $this->error('Repository is all ready exist!');
             $this->warn($file);
-
         } else {
-
             if (file_put_contents($file, $content)) {
-
                 if (!$this->hasModel) {
-
                     $this->warn('Please make sure model before using repository!');
                 }
                 $this->info('Repository has been successfully created.');
-
             } else {
-
                 $this->error('Error during creation repository');
             }
         }
@@ -187,9 +169,9 @@ class RepoGenerate extends Command
     /**
      * Repository content.
      *
-     * @return string
-     *
      * @throws \Exception
+     *
+     * @return string
      */
     protected function getRepositoryStub()
     {
@@ -201,5 +183,4 @@ class RepoGenerate extends Command
 
         throw new \Exception('Repository stub file not found!');
     }
-
 }

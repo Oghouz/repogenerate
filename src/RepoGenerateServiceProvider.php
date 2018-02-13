@@ -24,7 +24,6 @@ class RepoGenerateServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
         $this->publishes([
             __DIR__.'/config/repository.php' => config_path('repository.php'),
         ]);
@@ -35,12 +34,13 @@ class RepoGenerateServiceProvider extends ServiceProvider
         });
     }
 
-
+    /**
+     * @return array
+     */
     public function provides()
     {
         return [
             'command.make.repository',
         ];
     }
-
 }
