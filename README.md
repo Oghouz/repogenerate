@@ -1,4 +1,5 @@
 # Laravel Repository Generator
+[![StyleCI](https://styleci.io/repos/120919876/shield?branch=master)](https://styleci.io/repos/120919876) 
 
 *This package offer the possibility to generate repository for Laravel*
 
